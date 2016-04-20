@@ -2,50 +2,34 @@
 window.app = angular.module('ZipDrugApp', ['zipAuth', 'ui.router', 'ui.bootstrap']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
-    // This turns off hashbang urls (/#about) and changes it to something normal (/about)
     $locationProvider.html5Mode(true);
-    // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
     $urlRouterProvider.otherwise('/');
 });
 
-// This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
 
-    // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function (state) {
         return state.data && state.data.authenticate;
     };
 
-    // $stateChangeStart is an event fired
-    // whenever the process of changing a state begins.
+    // $stateChangeStart is an event fired whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
-        if (!destinationStateRequiresAuth(toState)) {
-            // The destination state does not require authentication
-            // Short circuit with return.
-            return;
-        }
-
-        if (AuthService.isAuthenticated()) {
-            // The user is authenticated.
-            // Short circuit with return.
-            return;
-        }
-
-        // Cancel navigating to new state.
+        if (!destinationStateRequiresAuth(toState)) { return; }
+        if (AuthService.isAuthenticated()) { return; }
         event.preventDefault();
 
-        AuthService.getLoggedInUser().then(function (user) {
-            // If a user is retrieved, then renavigate to the destination
-            // (the second time, AuthService.isAuthenticated() will work)
-            // otherwise, if no user is logged in, go to "login" state.
-            if (user) {
-                $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
-            }
-        });
-
     });
+
+    // $stateChangeError is an event fired whenever an error occurs while changing states.
+    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+        if (error) {
+            console.log(toState);
+            console.log(error);
+            console.log(fromParams);
+        }
+    });
+
+    $rootScope._ = window._;
 
 });
