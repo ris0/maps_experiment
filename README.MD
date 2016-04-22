@@ -9,6 +9,10 @@ Mongoose, Express, Angular, and Node
 APIs:
 Fusion Table, Google Maps, Google Place, and Google Maps Distance Matrix.
 
+Notes:
+
+
+
 I had a lot of fun building this application as I wanted to emulate some of things that we discussed during our interview.
 I remember Webber mentioning that one of the future goals for the company was to develop a messanger application.
 That was the first thing that came to mind when I was given this coding challenge.

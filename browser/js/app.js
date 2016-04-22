@@ -13,20 +13,17 @@ app.run(function ($rootScope, AuthService, $state) {
     };
 
     // $stateChangeStart is an event fired whenever the process of changing a state begins.
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
         if (!destinationStateRequiresAuth(toState)) { return; }
         if (AuthService.isAuthenticated()) { return; }
         event.preventDefault();
-
     });
 
     // $stateChangeError is an event fired whenever an error occurs while changing states.
-    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    $rootScope.$on('$stateChangeError', function(error, fromParams) {
         if (error) {
-            console.log(toState);
-            console.log(error);
-            console.log(fromParams);
+            console.log('This error occurred while changing states', error);
+            console.log('from params:', fromParams);
         }
     });
 

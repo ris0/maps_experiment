@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9mL7bgVP00yOTuq7JEyA4wV0B-vAIyZo"></script>
+
     <script src="/angular/angular.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
@@ -14,6 +16,10 @@
 </head>
 
 <body ng-app="ZipDrugApp">
-    <div id="main" ui-view></div>
+
+    <div id="main">
+        <ui-view></ui-view>
+    </div>
+
 </body>
 </html>

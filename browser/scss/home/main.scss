@@ -1,3 +1,5 @@
+
+
 #home {
   display: flex;
   justify-content: center;
@@ -8,6 +10,11 @@
   width: 75vw;
   height: 75vh;
   align-items: center;
-  background-color: white;
 }
 
+#map {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  width: 75vw;
+}

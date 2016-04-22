@@ -1,12 +1,16 @@
+app.controller('HomeCtrl', function ($scope, HomeFactory) {
+    $scope.map = HomeFactory.initMap();
+});
+
 // controllerAs syntax uses 'this' inside controllers, which gets bound to scope
-function HomeCtrl (loadMap) {
-    var hvm = this;
+//function HomeCtrl (loadMap) {
+//    var hvm = this;
     //var doSomething = function () { console.log('hi') };
     //hvm.doSomething = doSomething;
-    //hvm.message = "Hello";
-    hvm.loadMap = loadMap;
+//    hvm.loadMap = loadMap;
+//    return hvm;
+//
+//}
 
-}
-
-app.controller('HomeCtrl', HomeCtrl);
+//app.controller('HomeCtrl', HomeCtrl);
 
