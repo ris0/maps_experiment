@@ -5,7 +5,7 @@ var express = require('express'),
     https = require('https');
 
 router.get('/map', function(req, res, next) {
-    console.log('hitting this route');
+    //console.log('hitting this route');
 
     // AIzaSyB9mL7bgVP00yOTuq7JEyA4wV0B-vAIyZo
 

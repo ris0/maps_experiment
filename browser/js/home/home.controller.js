@@ -1,5 +1,6 @@
 app.controller('HomeCtrl', function ($scope, HomeFactory) {
     $scope.map = HomeFactory.initMap();
+    //$scope.findZip = HomeFactory.findZip();
 });
 
 // controllerAs syntax uses 'this' inside controllers, which gets bound to scope
