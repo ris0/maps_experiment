@@ -9,6 +9,7 @@ app.factory('HomeFactory', function ($http) {
         });
 
         var layer = new google.maps.FusionTablesLayer({
+            //https://www.google.com/fusiontables/DataSource?docid=1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw
             query: {
                 select: 'Geometry',
                 from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
@@ -27,24 +28,7 @@ app.factory('HomeFactory', function ($http) {
 
     };
 
-    //HomeFactory.findZip = function () {
-    //    var layer = new google.maps.FusionTablesLayer({
-    //        query: {
-    //            select: 'Geometry',
-    //            from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
-    //            where: 'ZIP = 11361'
-    //        },
-    //        styles: [{
-    //            polygonOptions: {
-    //                fillColor: '#00FF00',
-    //                fillOpacity: 0.3
-    //            }
-    //        }],
-    //        suppressInfoWindows: true
-    //    });
-    //};
 
-    //https://www.google.com/fusiontables/DataSource?docid=1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw#rows:id=1
 
     return HomeFactory;
 

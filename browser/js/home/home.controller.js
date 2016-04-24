@@ -15,3 +15,4 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
 
 //app.controller('HomeCtrl', HomeCtrl);
 
+// TODO: Sidebar that takes inputs, Google Places autocomplete, After submitting an array of zipcodes -> draw
