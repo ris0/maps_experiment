@@ -54,6 +54,7 @@
     "passport-local": "^1.0.0",
     "run-sequence": "^1.0.2",
     "sinon": "^1.13.0",
+    "snapjs": "^1.2.1",
     "supertest": "^0.15.0"
   }
 }
