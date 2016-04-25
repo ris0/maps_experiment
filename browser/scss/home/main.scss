@@ -1,11 +1,10 @@
 
-
 #home {
   display: flex;
   justify-content: center;
 }
 
-.mapContainer{
+#mapContainer{
   display: flex;
   width: 75vw;
   height: 75vh;
@@ -13,8 +12,9 @@
 }
 
 #map {
-  display: flex;
+  position: relative;
   justify-content: center;
   height: 75vh;
   width: 75vw;
 }
+

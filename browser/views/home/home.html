@@ -1,9 +1,39 @@
-<sidebar-directive></sidebar-directive>
+<!--<snap-drawer>-->
+    <!--<div class="snap-menu">-->
 
-<div id="home">
+    <!--<div class="sidebar-header text-center">-->
+        <!--&lt;!&ndash;<img src="images/logo.png" alt="" class="sidebar-img img-circle">&ndash;&gt;-->
+    <!--</div>-->
 
-    <div class="mapContainer">
-        <div id="map"> {{ map }}  {{ zipcodes }}</div>
+    <!--<ul class="snap-ul">-->
+        <!--<li><a >HELLLLLO </a></li>-->
+    <!--</ul>-->
+
+    <!--</div>-->
+<!--</snap-drawer>-->
+
+<!--<snap-content>-->
+    <!--<button snap-toggle="left"></button>-->
+
+    <!--<div id="home">-->
+        <!--<div id="map"> {{ map }} </div>-->
+    <!--</div>-->
+<!--</snap-content>-->
+
+
+<snap-drawers>
+    <snap-drawer>
+        <p>Hello from drawer!</p>
+    </snap-drawer>
+
+    <div snap-drawer="right">
+        <p>Hello from the right drawer!</p>
     </div>
+</snap-drawers>
 
-</div>
+<snap-content>
+    <p>Hello {{name}}!</p>
+    <p>The demo shows how to work with both left and right side drawers</p>
+    <button snap-toggle>Toggle Left</button>
+    <button snap-toggle="right">Toggle Right</button>
+</snap-content>
