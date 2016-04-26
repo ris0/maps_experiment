@@ -1,3 +1,16 @@
+#snapzd {
+  background-image: url("../../images/zdlogo.svg");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 25px;
+}
+
+#snapzd:focus{
+  outline: none !important;
+}
+
 
 #home {
   display: flex;
@@ -9,6 +22,11 @@
   width: 75vw;
   height: 75vh;
   align-items: center;
+}
+
+#zdlogo {
+  background-image: url('../../images/zdlogo.svg');
+  position: relative;
 }
 
 #map {

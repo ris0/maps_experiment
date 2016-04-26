@@ -5,6 +5,7 @@
 
 body {
   background: white;
+  font-family: 'Helvetica';
 }
 
 @mixin clearfix {
@@ -16,7 +17,9 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 @import 'directives/main';

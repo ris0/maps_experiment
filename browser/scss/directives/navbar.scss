@@ -1,9 +1,8 @@
 navbar {
-
   display: block;
   background: white;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
+  border-bottom: 1px black;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
 
   .container {
     width: 91%;
@@ -12,7 +11,7 @@ navbar {
   }
 
   a {
-    color: black;
+    color: white;
     font-size: 16px;
   }
 
@@ -30,27 +29,27 @@ navbar {
       background: none;
     }
   }
-
-  .login-button {
+  #start-btn {
     float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    background: none;
-    outline: none !important;
+    background-color: #f09142;
+    color: white;
+    font-size: 16px;
+    margin-right: 150px;
+    border-radius: 40px;
+    margin-bottom: 15px;
+    height: 40px;
+    width: 150px;
+    line-height: 14px;
   }
 
-  .welcome {
-    float: right;
-    margin-top: 12px;
-    span {
-      color: black;
-      font-size: 16px;
-      margin-right: 5px;
-    }
-    a {
-      color: #f30046;
-      cursor: pointer;
-    }
-  }
+}
+
+.navzdlogo {
+  padding: 0px;
+  margin-left: 150px;
+  height: 40px;
+  width: 150px;
+  vertical-align: baseline;
+  background-repeat: no-repeat !important;
 
 }
