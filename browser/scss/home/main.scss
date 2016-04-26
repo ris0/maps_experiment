@@ -5,6 +5,9 @@
   border: none;
   width: 40px;
   height: 25px;
+  float: left;
+  margin-top: 17.5%;
+  margin-left: 10px;
 }
 
 #snapzd:focus{
@@ -17,22 +20,10 @@
   justify-content: center;
 }
 
-#mapContainer{
-  display: flex;
-  width: 75vw;
-  height: 75vh;
-  align-items: center;
-}
-
-#zdlogo {
-  background-image: url('../../images/zdlogo.svg');
-  position: relative;
-}
-
 #map {
   position: relative;
   justify-content: center;
   height: 75vh;
-  width: 75vw;
+  width: 100%;
 }
 

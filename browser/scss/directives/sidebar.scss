@@ -3,7 +3,6 @@ snap-content {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
 }
 
 .snapjs-left snap-content {
@@ -11,5 +10,17 @@ snap-content {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
+}
+
+snap-drawer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+
+  .zdlogo2 {
+    height: 75px;
+    margin-left: 132px;
+  }
 }
