@@ -3,7 +3,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
     return {
         restrict: 'E',
         scope: {},
-        templateUrl: 'views/directives/navbar/navbar.html',
+        templateUrl: 'views/directives/navbar.html',
         link: function (scope) {
 
             scope.items = [

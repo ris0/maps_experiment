@@ -30,3 +30,23 @@ app.run(function ($rootScope, AuthService, $state) {
     $rootScope._ = window._;
 
 });
+
+/*
+
+TODO:
+1) Implement Navbar
+2) Take Zipdrug's styling and apply to your application
+3) Possibly take the footer as well.
+
+4) ng-model the input fields in the sidebar
+5) dynamically submit n amount of zipcodes and plot them on the field.
+6) auto complete with google places
+
+7) mvp check
+8) google matrix directions feature
+9) make responsive
+
+10) write front-end tests
+11) refactor code and modularize
+
+ */
