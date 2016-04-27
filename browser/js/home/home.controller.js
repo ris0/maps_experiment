@@ -1,5 +1,10 @@
 app.controller('HomeCtrl', function ($scope, HomeFactory) {
     $scope.map = HomeFactory.initMap();
+
+    $scope.submitCodes = function (params) {
+        console.log('hi');
+    };
+
     //$scope.findZip = HomeFactory.findZip();
 });
 
@@ -14,5 +19,3 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
 //}
 
 //app.controller('HomeCtrl', HomeCtrl);
-
-// TODO: Sidebar that takes inputs, Google Places autocomplete, After submitting an array of zipcodes -> draw

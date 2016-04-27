@@ -30,31 +30,33 @@
 <body ng-app="ZipDrugApp" class="container">
 
     <snap-drawer>
-        <img src="../../images/zdlogo.svg" class="zdlogo2">
+
+        <div class="zdlogo2"></div>
         <div class="form-content">
 
-            <form role="form">
-                <div class="table-form">
+            <label>Draw Zip Codes</label>
                     <div class="form-groups">
 
-                        <label>Outline Zip codes</label>
                         <div class="form-group">
-                            <input type="text" class="form-control input-md" placeholder="Enter Zip Code(s)"
-                                   ng-model="">
-                            <button class="btn btn-md"></button>
+                            <input type="text"
+                                   class="form-control input-md"
+                                   placeholder="Enter Zip Code(s)"
+                                   ng-model="params.input">
+                            <button class="button button-dark" ng-click="submitCodes()"> Submit </button>
                         </div>
 
+
                         <label>Directions</label>
-                        <div class="form-group">
-                            <input type="password" class="form-control input-md" placeholder="From" ng-model="">
-                            <input type="password" class="form-control input-md" placeholder="To" ng-model="">
-                            <button class="btn btn-md"></button>
-                        </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<input type="password" class="form-control input-md" placeholder="From" ng-model="">-->
+                            <!--<input type="password" class="form-control input-md" placeholder="To" ng-model="">-->
+                            <!--<button class="btn btn-md"></button>-->
+                        <!--</div>-->
 
 
                     </div>
 
-                </div>
             </form>
 
         </div>

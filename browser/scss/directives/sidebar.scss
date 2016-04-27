@@ -1,15 +1,23 @@
 snap-content {
   background-color: white;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
 }
 
 .snapjs-left snap-content {
   width: calc(100% - 265px) !important;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
+
+  #map {
+    width: calc(100% - 265px);
+    margin-right: 20px;
+  }
+
+  #snapzd {
+    margin-right: 0px;
+  }
+
 }
 
 snap-drawer {
@@ -20,7 +28,11 @@ snap-drawer {
   position: relative;
 
   .zdlogo2 {
-    height: 75px;
-    margin-left: 132px;
+    height: 100px;
+    width: 200px;
+    margin-top: 20px;
+    display: block;
+    background: url('../../images/zdlogo.svg') no-repeat;
+    background-size: cover;
   }
 }

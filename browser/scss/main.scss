@@ -1,11 +1,11 @@
-
 * {
   box-sizing: border-box;
+  font-family: 'Oxygen', sans-serif;
 }
 
 body {
   background: white;
-  font-family: 'Helvetica';
+  color: #1473ca;
 }
 
 @mixin clearfix {
@@ -22,3 +22,4 @@ body {
 
 @import 'directives/main';
 @import 'home/main';
+@import url('https://fonts.googleapis.com/css?family=Oxygen');

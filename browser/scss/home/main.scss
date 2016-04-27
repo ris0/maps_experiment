@@ -1,13 +1,11 @@
 #snapzd {
-  background-image: url("../../images/zdlogo.svg");
-  background-repeat: no-repeat;
-  background-color: transparent;
+  background: transparent url("../../images/zdlogo.svg") no-repeat;
   border: none;
   width: 40px;
   height: 25px;
   float: left;
-  margin-top: 17.5%;
-  margin-left: 10px;
+  margin-top: 32.5vh;
+  margin-right: 10px;
 }
 
 #snapzd:focus{
@@ -24,6 +22,6 @@
   position: relative;
   justify-content: center;
   height: 75vh;
-  width: 100%;
+  width: 75vw;
 }
 

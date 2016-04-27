@@ -1,4 +1,4 @@
-app.factory('HomeFactory', function ($http) {
+app.factory('HomeFactory', function () {
 
     var HomeFactory = {};
 
@@ -9,11 +9,12 @@ app.factory('HomeFactory', function ($http) {
         });
 
         var layer = new google.maps.FusionTablesLayer({
-            //https://www.google.com/fusiontables/DataSource?docid=1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw
+
             query: {
                 select: 'Geometry',
                 from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
-                where: 'ZIP = 11361'
+                where: " ZIP IN (11361,10003,10001,10022,10021,11365, 10012, 10056 ) "
+
             },
             styles: [{
                 polygonOptions: {
