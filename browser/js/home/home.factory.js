@@ -8,7 +8,7 @@ app.factory('HomeFactory', function () {
             element: document.getElementById('content')
         });
         return snapper;
-    }
+    };
 
     HomeFactory.initMap = function () {
         map = new google.maps.Map(document.getElementById('map'), {

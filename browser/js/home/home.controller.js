@@ -9,15 +9,17 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
 
             if( $scope.snapper.state().state=="left" ){
                 $scope.snapper.close();
+                $scope.snapper.disable();
             } else {
                 $scope.snapper.open('left');
+                $scope.snapper.disable();
             }
 
         });
     };
 
     $scope.drawZipCodes = function () {
-        HomeFactory.initMap($scope.params);
+        HomeFactory.drawZipCodes($scope.params);
         $scope.params.input = "";
     };
 
