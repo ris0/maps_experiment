@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <link rel="stylesheet" href="/angular-snap/angular-snap.css" type="text/css" />
 
     <!-- Other -->
     <script src="/lodash/index.js"></script>
@@ -20,7 +19,6 @@
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
     <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/angular-snap/angular-snap.js"></script>
 
     <!--gulp file-->
     <script src="/main.js"></script>
@@ -29,46 +27,9 @@
 
 <body ng-app="ZipDrugApp" class="container">
 
-    <snap-drawer>
-
-        <div class="zdlogo2"></div>
-        <div class="form-content">
-
-            <label>Draw Zip Codes</label>
-                    <div class="form-groups">
-
-                        <div class="form-group">
-                            <input type="text"
-                                   class="form-control input-md"
-                                   placeholder="Enter Zip Code(s)"
-                                   ng-model="params.input">
-                            <button class="button button-dark" ng-click="submitCodes()"> Submit </button>
-                        </div>
-
-
-                        <label>Directions</label>
-
-                        <!--<div class="form-group">-->
-                            <!--<input type="password" class="form-control input-md" placeholder="From" ng-model="">-->
-                            <!--<input type="password" class="form-control input-md" placeholder="To" ng-model="">-->
-                            <!--<button class="btn btn-md"></button>-->
-                        <!--</div>-->
-
-
-                    </div>
-
-            </form>
-
-        </div>
-
-    </snap-drawer>
-
-    <snap-content>
-        <navbar></navbar>
         <div id="main">
             <ui-view></ui-view>
         </div>
-    </snap-content>
 
 </body>
 </html>

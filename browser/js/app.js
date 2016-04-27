@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('ZipDrugApp', ['zipAuth', 'snap', 'ui.router', 'ui.bootstrap']);
+window.app = angular.module('ZipDrugApp', ['zipAuth', 'ui.router', 'ui.bootstrap']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

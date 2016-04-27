@@ -1,0 +1,103 @@
+* {
+  -webkit-transition: opacity 0s;
+  -moz-transition: opacity 0s;
+  -ms-transition: opacity 0s;
+  -o-transition: opacity 0s;
+  transition: opacity 0s;
+}
+
+.snapjs-left {
+
+  .snap-drawer {
+    position: absolute;
+    opacity: 100;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 265px;
+    height: auto;
+    overflow: auto;
+
+    .zdlogo2 {
+      height: 100px;
+      width: 200px;
+      margin-top: 20px;
+      background: url('../../images/zdlogo.svg') no-repeat;
+      background-size: cover;
+    }
+  }
+
+  .snap-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 265px);
+    height: auto;
+    z-index: 2;
+    overflow: auto;
+
+  }
+
+
+
+}
+
+.snap-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+
+}
+
+.snap-drawer {
+  position: absolute;
+  top: 0;
+  right: auto;
+  display: none;
+  bottom: 0;
+  left: auto;
+  width: 265px;
+  height: auto;
+  overflow: auto;
+
+  .zdlogo2 {
+    height: 100px;
+    width: 200px;
+    display: block;
+    background: url('../../images/zdlogo.svg') no-repeat;
+    background-size: cover;
+  }
+
+}
+
+.snap-drawer-left {
+  left: 0;
+  z-index: 1;
+}
+
+.snap-drawer-right {
+  right: 0;
+  z-index: 1;
+}
+
+.snapjs-left .snap-drawer-right,
+.snapjs-right .snap-drawer-left {
+  display: none;
+}
+
+.snapjs-expand-left .snap-drawer-left,
+.snapjs-expand-right .snap-drawer-right {
+  width: 100%;
+}

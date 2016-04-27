@@ -1,8 +1,24 @@
 app.controller('HomeCtrl', function ($scope, HomeFactory) {
     $scope.map = HomeFactory.initMap();
+    $scope.snapper= HomeFactory.snapper();
+    $scope.params = {};
 
-    $scope.submitCodes = function (params) {
-        console.log('hi');
+    $scope.toggleButton = function () {
+        var toggleButton = document.getElementById('snapzd');
+        toggleButton.addEventListener('click', function(){
+
+            if( $scope.snapper.state().state=="left" ){
+                $scope.snapper.close();
+            } else {
+                $scope.snapper.open('left');
+            }
+
+        });
+    };
+
+    $scope.drawZipCodes = function () {
+        HomeFactory.initMap($scope.params);
+        $scope.params.input = "";
     };
 
     //$scope.findZip = HomeFactory.findZip();
