@@ -1,34 +1,38 @@
-<div class="snap-drawer snap-drawer-left">
-    <div class="zdlogo2"></div>
+<div class="container">
 
-    <form name="zipCodeForm" ng-submit="drawZipCodes()">
-        <div class="form-content">
-            <label>Draw Zip Codes</label>
-            <div class="form-groups">
-                <div class="form-group">
-                    <input type="text"
-                           class="form-control input-md"
-                           placeholder="Enter Zip Code(s)"
-                           ng-model="params.input">
-                    <button class="button button-dark"> Submit </button>
+    <div class="snap-drawer snap-drawer-left">
+        <div class="zdlogo2"></div>
+
+        <form name="zipform" ng-submit="drawZipCodes()" novalidate>
+            <div class="form-content">
+                <label>Draw Zip Codes</label>
+                <div class="form-groups">
+                    <div class="form-group">
+                        <input type="text"
+                               class="form-control input-md"
+                               placeholder="Enter Zip Code(s)"
+                               ng-model="params.input">
+
+                        <button class="button button-dark"> Submit </button>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-</div>
-
-<div id="content" class="snap-content" data-snap-ignore="false">
-    <navbar></navbar>
-
-    <button class="fa-spin"
-            id="snapzd"
-            ng-click="toggleButton()">
-    </button>
-
-    <p>{{ params }}</p>
-
-    <div id="home">
-        <div id="map"> {{ map }} </div>
     </div>
+
+    <div id="content" class="snap-content" data-snap-ignore="false">
+        <navbar></navbar>
+
+        <button class="fa-spin"
+                id="snapzd"
+                ng-click="toggleButton()">
+        </button>
+
+        <div id="home">
+            <div id="map"></div>
+        </div>
+    </div>
+
 </div>

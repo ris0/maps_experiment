@@ -4,10 +4,9 @@ app.factory('HomeFactory', function () {
     var map, layer, newLayer;
 
     HomeFactory.snapper = function () {
-        var snapper = new Snap({
+        return new Snap({
             element: document.getElementById('content')
         });
-        return snapper;
     };
 
     HomeFactory.initMap = function () {
@@ -15,12 +14,13 @@ app.factory('HomeFactory', function () {
             center: { lat: 40.730610, lng: -73.935242 },
             zoom: 12
         });
+        layer = new google.maps.FusionTablesLayer();
     };
 
     HomeFactory.drawZipCodes = function (zipCodes) {
         var input = "(" + zipCodes + ")";
 
-        var layer = new google.maps.FusionTablesLayer({
+        layer.setOptions({
             query: {
                 select: 'Geometry',
                 from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
@@ -33,9 +33,8 @@ app.factory('HomeFactory', function () {
                     fillOpacity: 0.3
                 }
             }],
-            suppressInfoWindows: true
+            map: map
         });
-        layer.setMap(map);
     };
 
     return HomeFactory;
