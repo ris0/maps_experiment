@@ -17,13 +17,14 @@ app.factory('HomeFactory', function () {
         });
     };
 
-    HomeFactory.drawZipCodes = function (params) {
-        var zipCodes = params.input;
+    HomeFactory.drawZipCodes = function (zipCodes) {
+        var input = "(" + zipCodes + ")";
+
         var layer = new google.maps.FusionTablesLayer({
             query: {
                 select: 'Geometry',
                 from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
-                where: " ZIP IN (11361,10003,10001,10022,10021,11365, 10012, 10056 ) "
+                where: " ZIP IN " + input
 
             },
             styles: [{

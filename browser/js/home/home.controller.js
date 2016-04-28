@@ -1,10 +1,11 @@
 app.controller('HomeCtrl', function ($scope, HomeFactory) {
     $scope.map = HomeFactory.initMap();
-    $scope.snapper= HomeFactory.snapper();
+    $scope.snapper = HomeFactory.snapper();
     $scope.params = {};
 
     $scope.toggleButton = function () {
         var toggleButton = document.getElementById('snapzd');
+
         toggleButton.addEventListener('click', function(){
 
             if( $scope.snapper.state().state=="left" ){
@@ -19,7 +20,10 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
     };
 
     $scope.drawZipCodes = function () {
-        HomeFactory.drawZipCodes($scope.params);
+        var zipCodes = $scope.params.input;
+        console.log(zipCodes);
+        console.log(typeof zipCodes);
+        HomeFactory.drawZipCodes(zipCodes);
         $scope.params.input = "";
     };
 
