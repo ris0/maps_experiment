@@ -2,7 +2,6 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
     $scope.map = HomeFactory.initMap();
     $scope.snapper = HomeFactory.snapper();
     $scope.params = {};
-    //$scope.invalidFormat = "Invalid format: Please enter valid Zip Code(s) that separated by commas";
 
     $scope.toggleButton = function () {
         var toggleButton = document.getElementById('snapzd');
@@ -21,8 +20,6 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
     };
 
     $scope.drawZipCodes = function () {
-
-
         var zipCodes = $scope.params.input;
         HomeFactory.drawZipCodes(zipCodes);
         $scope.params.input = "";
