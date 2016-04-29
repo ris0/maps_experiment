@@ -8,6 +8,10 @@ body {
   color: #1473ca;
 }
 
+#main {
+  padding-top: 15px;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -15,11 +19,6 @@ body {
     clear: both;
   }
 }
-
-#main {
-  padding-top: 15px;
-}
-
 @import 'directives/main';
 @import 'home/main';
 @import "sidebar/main";

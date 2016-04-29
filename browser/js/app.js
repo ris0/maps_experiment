@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('ZipDrugApp', ['zipAuth', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('ZipDrugApp', ['zipAuth', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'MassAutoComplete']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -32,14 +32,17 @@ app.run(function ($rootScope, AuthService, $state) {
 });
 
 /*
-
 TODO:
-- auto complete with google places
+- auto complete with mass autocomplete || multiselect
 - google matrix directions feature
-- form validation
+- form validation?
 - refactor so that we are making 3rd party ajax requests go on the backend
-- mvp check
-- write front-end tests
 - refactor code and modularize
+- write front-end tests
 
+Questions:
+- How could I make an AJAX request to Google Maps on the back-end?
+- How could I fix my transition so that it can ease in & out better?
+- Do I write the code for localStorage on the front or back-end?
+- Should I do some form validation?
  */

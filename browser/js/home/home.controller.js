@@ -25,7 +25,6 @@ app.controller('HomeCtrl', function ($scope, HomeFactory) {
         $scope.params.input = "";
     };
 
-    //$scope.findZip = HomeFactory.findZip();
 });
 
 // controllerAs syntax uses 'this' inside controllers, which gets bound to scope
