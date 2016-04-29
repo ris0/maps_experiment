@@ -1,8 +1,17 @@
 'use strict';
 
-var express = require('express'),
+const express = require('express'),
     router = express.Router(),
-    https = require('https');
+    https = require('https'),
+    request = require('request'),
+    env = require('../../../env/development.js');
+
+router.get('/zip', function (req, res) {
+    const input = env.ZIP_JSON;
+    request(input, function (error, response, body) {
+      res.json(body);
+    })
+});
 
 router.get('/map', function(req, res, next) {
     //console.log('hitting this route');

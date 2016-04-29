@@ -2,7 +2,12 @@ app.config(function ($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         templateUrl: 'views/home/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        resolve: {
+            getZipCodes: function (HomeFactory) {
+                return HomeFactory.getZipCodes();
+            }
+        }
     });
 });
 

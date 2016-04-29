@@ -1,8 +1,8 @@
-app.factory('HomeFactory', function () {
+app.factory('HomeFactory', function ($http) {
 
     var HomeFactory = {},
         cacheSearch = [],
-        map, layer, input, autocomplete, infoWindow;
+        map, layer, input, infoWindow;
 
     HomeFactory.snapper = function () {
         return new Snap({
@@ -18,16 +18,11 @@ app.factory('HomeFactory', function () {
         });
 
         layer = new google.maps.FusionTablesLayer();
-        autocomplete = new google.maps.places.Autocomplete(input);
         infoWindow = new google.maps.InfoWindow();
+    };
 
-        autocomplete.bindTo('bounds', map);
-
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var current = autocomplete.getPlace();
-            cacheSearch.push(current.name);
-            input.value = cacheSearch.join(',');
-        });
+    HomeFactory.getZipCodes = function () {
+        return $http.get('/api/map/zip').then(response => response.data)
     };
 
     HomeFactory.drawZipCodes = function (zipCodes) {
