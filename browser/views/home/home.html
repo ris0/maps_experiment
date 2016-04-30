@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="snap-drawer snap-drawer-left">
+    <div class="snap-drawer snap-drawer-left" id="side-panel">
         <div class="zdlogo2"></div>
 
             <form name="sidebarForm">
@@ -23,19 +23,32 @@
                     <label> Directions </label>
                     <div class="form-group">
                         <input type="text"
-                               id = "directionInput"
+                               id = "origin-input"
                                class = "form-control input-md"
                                placeholder = "Choose starting point"
                                ng-model = "params.origin">
 
                         <input type="text"
+                               id = "destination-input"
                                class = "form-control input-md"
                                placeholder = "Choose destination"
                                ng-model = "params.destination">
 
-                        <button class="button button-dark"> Driving </button>
-                        <button class="button button-dark"> Transit </button>
-                        <button class="button button-dark"> Cycling </button>
+                        <div id="mode-selector" class="controls">
+                            <input type="radio" name="type" id="changemode-bicycling" checked="checked">
+                            <label for="changemode-bicycling">Bicycling</label>
+
+                            <input type="radio" name="type" id="changemode-transit">
+                            <label for="changemode-transit">Transit</label>
+
+                            <input type="radio" name="type" id="changemode-driving">
+                            <label for="changemode-driving">Driving</label>
+                        </div>
+
+                        <!--<button id="driving-input" class="button button-dark"> Driving-->
+                        <!--</button>-->
+                        <!--<button class="button button-dark"> Transit </button>-->
+                        <!--<button class="button button-dark"> Cycling </button>-->
                     </div>
                 </div>
             </div>
@@ -53,7 +66,9 @@
 
         <div id="home">
             <div id="map"></div>
+            <div id="right-panel"></div>
         </div>
+
     </div>
 
 </div>

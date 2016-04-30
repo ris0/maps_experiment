@@ -17,6 +17,8 @@ app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
         });
     };
 
+
+
     $scope.drawZipCodes = function () {
         var zipCodes = $scope.params.input;
         HomeFactory.drawZipCodes(zipCodes);
@@ -35,10 +37,6 @@ app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
 
         return results;
     }
-
-    $scope.autocomplete_options = {
-        suggest: suggest_zip
-    };
 
     function suggest_zip_delimited(term) {
         var ix = term.lastIndexOf(','),
