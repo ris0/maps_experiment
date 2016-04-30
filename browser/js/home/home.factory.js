@@ -2,7 +2,7 @@ app.factory('HomeFactory', function ($http) {
 
     var HomeFactory = {},
         cacheSearch = [],
-        map, layer, input, infoWindow;
+        map, layer, input, infoWindow, autocomplete;
 
     HomeFactory.snapper = function () {
         return new Snap({
@@ -11,7 +11,7 @@ app.factory('HomeFactory', function ($http) {
     };
 
     HomeFactory.initMap = function () {
-        input = document.getElementById('zip-input');
+        input = document.getElementById('directionInput');
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 40.730610, lng: -73.935242 },
             zoom: 12
@@ -19,6 +19,8 @@ app.factory('HomeFactory', function ($http) {
 
         layer = new google.maps.FusionTablesLayer();
         infoWindow = new google.maps.InfoWindow();
+        autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
     };
 
     HomeFactory.getZipCodes = function () {
@@ -42,6 +44,25 @@ app.factory('HomeFactory', function ($http) {
             }],
             map: map
         });
+    };
+
+    HomeFactory.getDirections = function () {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: document.getElementById('start').value,
+                destination: document.getElementById('end').value,
+                travelMode: google.maps.TravelMode.DRIVING
+            }, function(response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
     };
 
     return HomeFactory;

@@ -3,21 +3,40 @@
     <div class="snap-drawer snap-drawer-left">
         <div class="zdlogo2"></div>
 
-        <form name="zipform" ng-submit="drawZipCodes()" novalidate>
-            <div class="form-content">
-                <label>Draw Zip Codes</label>
-                <div class="form-groups">
-                    <div mass-autocomplete
-                         class="form-group">
+            <form name="sidebarForm">
+                <div class="form-content">
+
+                    <label>Draw Zip Codes</label>
+                    <div class="form-groups">
+                    <div mass-autocomplete class="form-group">
                         <input type="text"
                                class = "form-control input-md"
                                placeholder = "Enter Zip Code(s)"
-                               mass-autocomplete-item="autocomplete_options"
+                               mass-autocomplete-item="ac_option_delimited"
                                ng-model = "params.input">
 
-                        <button class="button button-dark"> Submit </button>
+                        <button class="button button-dark" ng-click="drawZipCodes()"> Submit </button>
+
+
                     </div>
 
+                    <label> Directions </label>
+                    <div class="form-group">
+                        <input type="text"
+                               id = "directionInput"
+                               class = "form-control input-md"
+                               placeholder = "Choose starting point"
+                               ng-model = "params.origin">
+
+                        <input type="text"
+                               class = "form-control input-md"
+                               placeholder = "Choose destination"
+                               ng-model = "params.destination">
+
+                        <button class="button button-dark"> Driving </button>
+                        <button class="button button-dark"> Transit </button>
+                        <button class="button button-dark"> Cycling </button>
+                    </div>
                 </div>
             </div>
         </form>

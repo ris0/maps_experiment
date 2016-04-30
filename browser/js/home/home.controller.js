@@ -2,12 +2,10 @@ app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
     $scope.map = HomeFactory.initMap();
     $scope.snapper = HomeFactory.snapper();
     $scope.params = {};
-    $scope.zipJSON = getZipCodes;
+    $scope.zipCodes = getZipCodes;
 
     $scope.toggleButton = function () {
         var toggleButton = document.getElementById('snapzd');
-        console.log($scope.zipJSON);
-
         toggleButton.addEventListener('click', function(){
             if( $scope.snapper.state().state=="left" ){
                 $scope.snapper.close();
@@ -25,31 +23,28 @@ app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
         $scope.params.input = "";
     };
 
-    var states = ['Alabama', 'Alaska', 'California'];
-
-    function suggest_state(term) {
-        var q = term.toLowerCase().trim();
+    function suggest_zip(term) {
+        var q = term.trim();
         var results = [];
 
-        // Find first 10 states that start with `term`.
-        for (var i = 0; i < states.length && results.length < 10; i++) {
-            var state = states[i];
-            if (state.toLowerCase().indexOf(q) === 0)
-                results.push({ label: state, value: state });
+        for (var i = 0; i < $scope.zipCodes.length && results.length < 10; i++) {
+            var zip = $scope.zipCodes[i];
+            if (zip.indexOf(q) === 0)
+                results.push({ label: zip , value: zip });
         }
 
         return results;
     }
 
     $scope.autocomplete_options = {
-        suggest: suggest_state
+        suggest: suggest_zip
     };
 
-    function suggest_state_delimited(term) {
+    function suggest_zip_delimited(term) {
         var ix = term.lastIndexOf(','),
             lhs = term.substring(0, ix + 1),
             rhs = term.substring(ix + 1),
-            suggestions = suggest_state(rhs);
+            suggestions = suggest_zip(rhs);
 
         suggestions.forEach(function (s) {
             s.value = lhs + s.value;
@@ -59,7 +54,7 @@ app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
     };
 
     $scope.ac_option_delimited = {
-        suggest: suggest_state_delimited
+        suggest: suggest_zip_delimited
     };
 
 });

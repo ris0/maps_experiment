@@ -4,9 +4,7 @@ app.config(function ($stateProvider) {
         templateUrl: 'views/home/home.html',
         controller: 'HomeCtrl',
         resolve: {
-            getZipCodes: function (HomeFactory) {
-                return HomeFactory.getZipCodes();
-            }
+            getZipCodes:  HomeFactory => HomeFactory.getZipCodes()
         }
     });
 });
