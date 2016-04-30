@@ -10,13 +10,16 @@ app.factory('HomeFactory', function ($http) {
     };
 
     HomeFactory.initMap = function () {
+
+
         //var originInput= document.getElementById('origin-input');
         //var destinationInput= document.getElementById('destination-input');
         var newYork = { lat: 40.730610, lng: -73.935242 };
         var mapOptions = {
-            mapTypeControl: false,
             center: newYork,
-            zoom: 12
+            zoom: 12,
+            mapTypeControl: false,
+            disableDefaultUI: false
         };
 
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -43,6 +46,35 @@ app.factory('HomeFactory', function ($http) {
         origin_autocomplete.bindTo('bounds', map);
         var destination_autocomplete = new google.maps.places.Autocomplete(destination_input);
         destination_autocomplete.bindTo('bounds', map);
+
+
+        function getDetails() {
+            if (!localStorage.mapCenter.lat || !localStorage.mapCenter.lng) {
+                return false;
+            }
+            var mapCenter = JSON.parse(localStorage.mapCenter);
+            var mapZoom = JSON.parse(localStorage.mapZoom);
+            var center = new google.maps.LatLng(mapCenter.lat,mapCenter.lng);
+            console.log('inside the function');
+            map.setCenter(center);
+            map.setZoom(mapZoom);
+        }
+
+        function saveMap() {
+            var center = map.getCenter();
+            var zoom = map.getZoom();
+
+            localStorage.mapCenter = JSON.stringify(center);
+            localStorage.mapZoom = zoom;
+        }
+
+        google.maps.event.addListener(map, 'click', function() {
+            console.log("click");
+            console.log("click");
+            saveMap();
+        });
+
+        getDetails();
 
         // Sets a listener on a radio button to change the filter type on Places Autocomplete.
         function setupClickListener(id, mode) {
@@ -82,7 +114,7 @@ app.factory('HomeFactory', function ($http) {
         destination_autocomplete.addListener('place_changed', function() {
             var place = destination_autocomplete.getPlace();
             if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
+                window.alert("Returned place contains no geometry");
                 return;
             }
             expandViewportToFitPlace(map, place);
@@ -99,7 +131,6 @@ app.factory('HomeFactory', function ($http) {
             if (!origin_place_id || !destination_place_id) {
                 return;
             }
-            console.log(travel_mode);
             directionsService.route({
                 origin: {'placeId': origin_place_id},
                 destination: {'placeId': destination_place_id},
@@ -115,6 +146,9 @@ app.factory('HomeFactory', function ($http) {
                 }
             });
         }
+
+
+
 
 
     };
