@@ -1,3 +1,26 @@
+(() => {
+    'use strict';
+
+    angular
+        .module('ZipAppDrug')
+        .controller('HomeCtrl', HomeCtrl);
+
+    function HomeCtrl (HomeFactory, getZipCodes) {
+        // think about moving to ui-router
+        let map = HomeFactory.initMap();
+        let snapper = HomeFactory.snapper(); // Do we have to invoker this thing here? Why isn't this in a service?
+
+
+        // exports
+        this.params = {};
+        this.map = map;
+
+    }
+
+})();
+
+
+
 app.controller('HomeCtrl', function ($scope, HomeFactory, getZipCodes) {
     $scope.map = HomeFactory.initMap();
     $scope.snapper = HomeFactory.snapper();
