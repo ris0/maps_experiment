@@ -3,16 +3,9 @@
 
     angular
         .module('ZipDrugApp', [
-        'ui.bootstrap', 'ngAnimate',
-        'ngSanitize', 'MassAutoComplete',
-        'ui.router'
+            'app.layout',
+            'app.logger'
+
         ])
-        .run(function ($rootScope) {
-            /** @desc $stateChangeError is an event fired whenever an error occurs while changing state. */
-            let stateErrorHandler = error => {
-                if (error) { console.log(error); }
-                $rootScope.$on('$stateChangeError', stateErrorHandler);
-            }
-        });
 })();
 

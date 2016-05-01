@@ -3,9 +3,15 @@
 
     angular
         .module('app.layout', [
+            /** @desc Angular Modules */
             'ui.bootstrap', 'ui.router',
             'ngAnimate', 'ngSanitize',
-            'MassAutoComplete'
+
+            /** @desc 3rd party Modules*/
+            'MassAutoComplete', 'snap',
+
+            /** @desc Cross app modules*/
+            'app.logger'
         ])
         .run(runBlock);
 

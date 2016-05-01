@@ -5,7 +5,9 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    function LayoutController (HomeFactory, getZipCodes) {
+    function LayoutController (getZipCodes) {
+        var vm = this;
+        vm.getZipCodes = getZipCodes;
 
     }
 
