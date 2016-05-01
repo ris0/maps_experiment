@@ -31,7 +31,7 @@ gulp.task('reloadCSS', function () {
 
 gulp.task('lintJS', function () {
 
-    return gulp.src(['./browser/js/**/*.js', './server/**/*.js'])
+    return gulp.src(['./browser/app/**/*.js', './server/**/*.js'])
         .pipe(plumber({
             errorHandler: notify.onError('Linting FAILED! Check your gulp process.')
         }))
@@ -42,7 +42,7 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/app/app.module.js', './browser/app/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
@@ -108,7 +108,7 @@ gulp.task('buildCSSProduction', function () {
 });
 
 gulp.task('buildJSProduction', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/app/app.module.js', './browser/app/**/*.js'])
         .pipe(concat('main.js'))
         .pipe(babel())
         .pipe(ngAnnotate())
@@ -133,12 +133,10 @@ gulp.task('default', function () {
 
     gulp.start('build');
 
-    // Run when anything inside of browser/js changes.
-    gulp.watch('browser/js/**', function () {
+    gulp.watch('browser/app/**', function () {
         runSeq('buildJS', 'reload');
     });
 
-    // Run when anything inside of browser/scss changes.
     gulp.watch('browser/scss/**', function () {
         runSeq('buildCSS', 'reloadCSS');
     });

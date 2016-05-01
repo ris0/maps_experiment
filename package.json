@@ -12,7 +12,6 @@
   "dependencies": {
     "angular": "^1.5.0-beta.0",
     "angular-mocks": "^1.4.0",
-    "angular-toastr": "^1.7.0",
     "angular-ui-bootstrap": "^0.14.3",
     "angular-ui-router": "^0.2.15",
     "babel": "^5.0.12",
@@ -56,6 +55,7 @@
     "run-sequence": "^1.0.2",
     "sinon": "^1.13.0",
     "snapjs": "^1.2.1",
-    "supertest": "^0.15.0"
+    "supertest": "^0.15.0",
+    "toastr": "^2.1.2"
   }
 }

@@ -1,9 +1,22 @@
+#home {
+  display: flex;
+  justify-content: center;
+  padding-left: 15px;
+}
+
+#map {
+  position: relative;
+  justify-content: center;
+  height: 75vh;
+  width: 75vw;
+}
+
 #snapzd {
   background: transparent url("../../images/zdlogo.svg") no-repeat;
   background-size: cover;
   border: none;
-  width: 40px;
-  height: 25px;
+  width: 60px;
+  height: 35px;
   float: left;
   margin-top: 32.5vh;
   margin-left: 2.5%;
@@ -12,18 +25,8 @@
 #snapzd:focus{
   outline: none !important;
 }
-#home {
-  display: flex;
-  justify-content: center;
-}
 
-#map {
-  position: relative;
-  justify-content: center;
-  height: 75vh;
-  width: 75vw;
-  margin-right: 75px;
-}
+// map controls
 
 .controls {
   margin-top: 10px;
@@ -65,47 +68,57 @@
 }
 
 #right-panel {
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#right-panel select, #right-panel input {
-  font-size: 15px;
-}
-
-#right-panel select {
-  width: 100%;
-}
-
-#right-panel i {
-  font-size: 12px;
-}
-#right-panel {
   height: 100%;
   float: right;
-  width: 390px;
+  width: 125px;
   overflow: auto;
 }
-#map {
-  margin-right: 400px;
+
+
+// autocomplete
+
+.ac-container {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 999;
 }
-#floating-panel {
-  background: #fff;
-  padding: 5px;
-  font-size: 14px;
-  font-family: Arial;
+
+.ac-container .ac-menu {
   border: 1px solid #ccc;
-  box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-  display: none;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 3px 7px 0px rgba(0, 0, 0, 0.15);
+  margin: 0;
 }
-@media print {
-  #map {
-    height: 500px;
-    margin: 0;
-  }
-  #right-panel {
-    float: none;
-    width: auto;
-  }
+.ac-container .ac-menu .ac-menu-item {
+  border-bottom: 1px dotted #ccc;
+  line-height: 35px;
+  margin: 0;
 }
+.ac-container .ac-menu .ac-menu-item:last-child {
+  border-bottom: 0;
+}
+.ac-container .ac-menu .ac-menu-item:hover {
+  background-color: #e0eaff;
+}
+.ac-container .ac-menu a {
+  padding-left: 5px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.ac-container .ac-menu .ac-state-focus {
+  outline: none;
+  background-color: #e0eaff;
+}
+
+

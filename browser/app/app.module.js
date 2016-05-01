@@ -2,10 +2,12 @@
     'use strict';
 
     angular
-        .module('ZipDrugApp', [
-            'app.layout',
-            'app.logger'
-
+        .module('app', [
+            'app.logger',
+            'app.core',
+            'app.map',
+            'app.layout'
         ])
+
 })();
 

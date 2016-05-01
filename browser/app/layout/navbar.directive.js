@@ -8,7 +8,7 @@
     function navbar() {
         var directive = {
             restrict: 'E',
-            templateUrl: '/navbar/navbar.html'
+            templateUrl: 'app/layout/navbar.html'
         };
         return directive;
     }

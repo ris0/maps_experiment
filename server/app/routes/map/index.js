@@ -10,6 +10,7 @@ const express = require('express'),
 
 router.get('/zip', (req, res) => {
     let result = [];
+    console.log('hitting this route');
     zipCodes.forEach( el => result.push(el.PostalCode) );
     res.send(result);
 });

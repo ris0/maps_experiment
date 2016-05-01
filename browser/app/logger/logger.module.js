@@ -1,4 +1,5 @@
 (function() {
     'use strict';
-    angular.module('app.logger', []);
+    angular
+        .module('app.logger', []);
 })();

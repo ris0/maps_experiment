@@ -12,10 +12,10 @@
                         <input type="text"
                                class = "form-control input-md"
                                placeholder = "Enter Zip Code(s)"
-                               mass-autocomplete-item="ac_option_delimited"
-                               ng-model = "params.input">
+                               mass-autocomplete-item="vm.ac_option_delimited"
+                               ng-model = "vm.params.input">
 
-                        <button class="button button-dark" ng-click="drawZipCodes()"> Submit </button>
+                        <button class="button button-dark" ng-click="vm.drawZipCodes()"> Submit </button>
 
 
                     </div>
@@ -26,13 +26,13 @@
                                id = "origin-input"
                                class = "form-control input-md"
                                placeholder = "Choose starting point"
-                               ng-model = "params.origin">
+                               ng-model = "vm.params.origin">
 
                         <input type="text"
                                id = "destination-input"
                                class = "form-control input-md"
                                placeholder = "Choose destination"
-                               ng-model = "params.destination">
+                               ng-model = "vm.params.destination">
 
                         <div id="mode-selector" class="controls">
                             <input type="radio" name="type" id="changemode-bicycling" checked="checked">
@@ -59,9 +59,9 @@
     <div id="content" class="snap-content" data-snap-ignore="false">
         <navbar></navbar>
 
-        <button class="fa-spin"
+        <button toggle-button="snapper"
                 id="snapzd"
-                ng-click="toggleButton()">
+                ng-click="vm.toggleButton()">
         </button>
 
         <div id="home">
