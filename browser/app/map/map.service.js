@@ -18,7 +18,7 @@
         /** @desc GoogleMap Constrcutor Function */
         function GoogleMap(latLng) {
 
-            /** @desc Initial configuration */
+            /** @desc Configuration */
             var nyc = { lat: 40.730610, lng: -73.935242 };
             this.mapOptions = {
                 center: latLng || nyc,
@@ -55,7 +55,7 @@
 
             function setClickListener(id, mode) {
                 var radioButton = document.getElementById(id);
-                radioButton.addEventListener('click', () => { gmap.travel_mode = mode })
+                radioButton.addEventListener('click', () => { this.travel_mode = mode })
             }
 
             this.expandViewportToFitPlace = function (map, place) {
