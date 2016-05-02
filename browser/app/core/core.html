@@ -3,25 +3,29 @@
     <div class="snap-drawer snap-drawer-left" id="side-panel">
         <div class="zdlogo2"></div>
 
-            <form name="sidebarForm">
+            <form name="sidebarForm" class="form-style">
                 <div class="form-content">
 
-                    <label>Draw Zip Codes</label>
                     <div class="form-groups">
+
                     <div mass-autocomplete class="form-group">
+                        <label>Draw Zip Codes</label>
                         <input type="text"
                                class = "form-control input-md"
                                placeholder = "Enter Zip Code(s)"
                                mass-autocomplete-item="vm.ac_option_delimited"
                                ng-model = "vm.params.input">
 
-                        <button class="button button-dark" ng-click="vm.drawZipCodes()"> Submit </button>
-
-
+                        <div class="btn-group btn-group-justified">
+                            <button class="zip-button" type="button" ng-click="vm.drawZipCodes()"> Submit </button>
+                            <button class="zip-clear-button" type="button"> Clear </button>
+                        </div>
                     </div>
 
-                    <label> Directions </label>
+                        <i class="fa fa-bicycle"></i>
+
                     <div class="form-group">
+                        <label> Directions </label>
                         <input type="text"
                                id = "origin-input"
                                class = "form-control input-md"
@@ -34,21 +38,11 @@
                                placeholder = "Choose destination"
                                ng-model = "vm.params.destination">
 
-                        <div id="mode-selector" class="controls">
-                            <input type="radio" name="type" id="changemode-bicycling" checked="checked">
-                            <label for="changemode-bicycling">Bicycling</label>
-
-                            <input type="radio" name="type" id="changemode-transit">
-                            <label for="changemode-transit">Transit</label>
-
-                            <input type="radio" name="type" id="changemode-driving">
-                            <label for="changemode-driving">Driving</label>
+                        <div class="btn-group btn-group-justified" id="btn-grp2">
+                            <button type="button" id="changemode-bicycling"> Bicycle </button>
+                            <button type="button" id="changemode-transit" > Transit </button>
+                            <button type="button" id="changemode-driving" > Drive </button>
                         </div>
-
-                        <!--<button id="driving-input" class="button button-dark"> Driving-->
-                        <!--</button>-->
-                        <!--<button class="button button-dark"> Transit </button>-->
-                        <!--<button class="button button-dark"> Cycling </button>-->
                     </div>
                 </div>
             </div>

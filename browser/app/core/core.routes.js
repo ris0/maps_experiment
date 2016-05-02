@@ -26,8 +26,9 @@
     }
 
     function errorHandler($rootScope, logger) {
-        $rootScope.$on('$stateChangeError', function (error) {
+        $rootScope.$on('$stateChangeError', function (error, event) {
             if (error) { logger.error('Error while changing states', error); }
+            if (event) { logger.error('The event that caused the error', event); }
         })
     }
 

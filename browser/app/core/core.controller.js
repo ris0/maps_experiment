@@ -5,7 +5,7 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
-    function CoreController (googleMapService, getZipCodes, $document) {
+    function CoreController (googleMapService, getZipCodes) {
         var vm = this;
 
         /** @desc Google Map & JSON data */

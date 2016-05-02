@@ -15,6 +15,14 @@
 
         return service;
 
+        //////////////////////////////
+
+        function getZipCodes () {
+            return $http.get('/api/map/zip')
+                .then(response => response.data)
+                .catch(error => logger.error(error));
+        }
+
         /** @desc GoogleMap Constrcutor Function */
         function GoogleMap(latLng) {
 
@@ -104,10 +112,56 @@
 
             gmap.destination_autocomplete.addListener('place_changed', destinationCallBack);
             gmap.origin_autocomplete.addListener('place_changed', originCallBack);
+            //placeMarker(event.latLng);
 
+            /** @desc: localStorage * */
+            gmap.map.addListener(gmap.map, 'center_changed', (event) => {
+                console.log(event);
+                writeToStorage(event.latLng);
+            });
+            setupStorage();
+            readFromStorage();
+
+            function setupStorage() {
+                localStorage.locations = [];
+                //return (!localStorage.locations) ? [] : localStorage.location;
+            }
+
+            function writeToStorage(location) {
+                localStorage.locations.push(location);
+            }
+
+            function readFromStorage() {
+                console.log(typeof localStorage.locations);
+                //localStorage.locations.forEach(location => { placeMarker(location) });
+            }
+
+            //Funcion to place the marker on the map (flag)
+            //function placeMarker(location) {
+            //    var marker = new google.maps.Marker({
+            //        position: location,
+            //        icon:'flag.png',
+            //        map: map
+            //    });
+            //    //open information window once marker is placed
+            //    var infowindow = new google.maps.InfoWindow({
+            //        content: 'User has placed warning'
+            //    });
+            //    infowindow.open(map,marker);
+            //
+            //    //zoom into the marker
+            //    google.maps.event.addListener(marker,'click',function() {
+            //        map.setZoom(17);
+            //        map.setCenter(marker.getPosition());
+            //    });
+            //
+            //}
+
+            //////////////////////////////
 
             function originCallBack() {
                 var place = gmap.origin_autocomplete.getPlace();
+
                 if (!place.geometry) { logger.log("Returned place contains no geometry"); }
 
                 gmap.expandViewportToFitPlace(gmap.map, place);
@@ -120,9 +174,7 @@
             function destinationCallBack() {
                 var place = gmap.destination_autocomplete.getPlace();
 
-                if (!place.geometry) {
-                    logger.log("Returned place contains no geometry");
-                }
+                if (!place.geometry) { logger.log("Returned place contains no geometry"); }
 
                 gmap.expandViewportToFitPlace(gmap.map, place);
                 gmap.destination_place_id = place.place_id;
@@ -130,12 +182,6 @@
                                gmap.travel_mode, gmap.directionsService, gmap.directionsDisplay );
             }
 
-        }
-
-        function getZipCodes () {
-            return $http.get('/api/map/zip')
-                .then(response => response.data)
-                .catch(error => logger.error(error));
         }
 
         function drawZipCodes (zipCodes) {
@@ -161,6 +207,12 @@
             gmap.layer.setOptions(layerObject);
         }
 
+
+
     }
 
 })();
+
+
+
+
