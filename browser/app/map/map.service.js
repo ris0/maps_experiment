@@ -15,114 +15,131 @@
 
         return service;
 
-        var map = null;
-        var layer = null;
-        function initMap () {
+        /** @desc GoogleMap Constrcutor Function */
+        function GoogleMap(latLng) {
+
+            /** @desc Initial configuration */
             var nyc = { lat: 40.730610, lng: -73.935242 };
-            var mapOptions = {
-                center: nyc,
+            this.mapOptions = {
+                center: latLng || nyc,
                 zoom: 12,
                 mapTypeControl: false,
                 disableDefaultUI: false
             };
 
-            map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            layer = new google.maps.FusionTablesLayer();
-            var origin_place_id = null;
-            var destination_place_id = null;
-            var travel_mode = google.maps.TravelMode.BICYCLING;
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
+            this.map_id = document.getElementById('map');
+            this.right_panel = document.getElementById('right-panel');
+            this.origin_input = document.getElementById('origin-input');
+            this.destination_input = document.getElementById('destination-input');
 
-            directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById('right-panel'));
+            /** @desc Insantiate Google Maps, Directions, Places, and Fusion Tables*/
+            this.map = new google.maps.Map(this.map_id, this.mapOptions);
+            this.layer = new google.maps.FusionTablesLayer();
+            this.directionsService = new google.maps.DirectionsService;
+            this.directionsDisplay = new google.maps.DirectionsRenderer;
+            this.origin_autocomplete = new google.maps.places.Autocomplete(this.origin_input);
+            this.destination_autocomplete = new google.maps.places.Autocomplete(this.destination_input);
 
-            var origin_input = document.getElementById('origin-input');
-            var destination_input = document.getElementById('destination-input');
+            /** @desc Bind services to map */
+            this.origin_autocomplete.bindTo('bounds', this.map);
+            this.destination_autocomplete.bindTo('bounds', this.map);
+            this.travel_mode = google.maps.TravelMode.BICYCLING;
+            this.origin_place_id = null;
+            this.destination_place_id = null;
 
-            var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
-            origin_autocomplete.bindTo('bounds', map);
-            var destination_autocomplete = new google.maps.places.Autocomplete(destination_input);
-            destination_autocomplete.bindTo('bounds', map);
+            /** @desc Event listener Constructor fn and Directions & Route route */
+            this.setClickListener = setClickListener;
+            this.getRoute = getRoute;
 
-            function setupClickListener(id, mode) {
+            //////////////////////////////
+
+            function setClickListener(id, mode) {
                 var radioButton = document.getElementById(id);
-                radioButton.addEventListener('click', function() {
-                    travel_mode = mode;
-                });
+                radioButton.addEventListener('click', () => { gmap.travel_mode = mode })
             }
-            setupClickListener('changemode-bicycling', google.maps.TravelMode.BICYCLING);
-            setupClickListener('changemode-transit', google.maps.TravelMode.TRANSIT);
-            setupClickListener('changemode-driving', google.maps.TravelMode.DRIVING);
 
-            function expandViewportToFitPlace(map, place) {
+            this.expandViewportToFitPlace = function (map, place) {
                 if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
+                    this.map.fitBounds(place.geometry.viewport);
                 } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
+                    this.map.setCenter(place.geometry.location);
+                    this.map.setZoom(17);
                 }
-            }
+            };
 
-            origin_autocomplete.addListener('place_changed', function() {
-                var place = origin_autocomplete.getPlace();
-                if (!place.geometry) {
-                    logger.log("Autocomplete's returned place contains no geometry");
-                    return;
-                }
-                expandViewportToFitPlace(map, place);
+            function getRoute(origin, destination, travel_mode, directionsService, directionsDisplay) {
+                if (!origin || !destination) { return; }
+                var right_panel = document.getElementById('right-panel');
 
-                origin_place_id = place.place_id;
-                route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay);
-            });
-
-
-            destination_autocomplete.addListener('place_changed', function() {
-                var place = destination_autocomplete.getPlace();
-                if (!place.geometry) { logger.log("Returned place contains no geometry"); }
-
-                expandViewportToFitPlace(map, place);
-                destination_place_id = place.place_id;
-                route( origin_place_id, destination_place_id, travel_mode,directionsService, directionsDisplay );
-            });
-
-
-            function route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) {
-                if (!origin_place_id || !destination_place_id) { return; }
-                directionsService.route({
-                    origin: {'placeId': origin_place_id},
-                    destination: {'placeId': destination_place_id},
+                var config = {
+                    origin: { 'placeId': origin },
+                    destination: {'placeId': destination},
                     travelMode: travel_mode,
                     optimizeWaypoints: true
-                }, function(response, status) {
+                };
+                directionsService.route(config, getRouteCb);
+
+                /** @desc getRouteCb definition */
+                function getRouteCb(response, status) {
                     if (status === google.maps.DirectionsStatus.OK) {
                         directionsDisplay.setDirections(response);
-                        directionsDisplay.setPanel(document.getElementById('right-panel'));
+                        directionsDisplay.setPanel(right_panel);
                     } else {
                         logger.error(status);
                     }
-                });
+                }
             }
+
         }
 
+        function initMap () {
+            var gmap = new GoogleMap();
+
+            gmap.directionsDisplay.setMap(gmap.map);
+            gmap.directionsDisplay.setPanel(gmap.right_panel);
+
+            gmap.setClickListener('changemode-bicycling', google.maps.TravelMode.BICYCLING);
+            gmap.setClickListener('changemode-transit', google.maps.TravelMode.TRANSIT);
+            gmap.setClickListener('changemode-driving', google.maps.TravelMode.DRIVING);
+
+            gmap.destination_autocomplete.addListener('place_changed', destinationCallBack);
+            gmap.origin_autocomplete.addListener('place_changed', originCallBack);
 
 
+            function originCallBack() {
+                var place = gmap.origin_autocomplete.getPlace();
+                if (!place.geometry) { logger.log("Returned place contains no geometry"); }
 
+                gmap.expandViewportToFitPlace(gmap.map, place);
+                gmap.origin_place_id = place.place_id;
+                gmap.getRoute( gmap.origin_place_id, gmap.destination_place_id,
+                            gmap.travel_mode, gmap.directionsService, gmap.directionsDisplay );
 
+            }
 
+            function destinationCallBack() {
+                var place = gmap.destination_autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    logger.log("Returned place contains no geometry");
+                }
+
+                gmap.expandViewportToFitPlace(gmap.map, place);
+                gmap.destination_place_id = place.place_id;
+                gmap.getRoute( gmap.origin_place_id, gmap.destination_place_id,
+                               gmap.travel_mode, gmap.directionsService, gmap.directionsDisplay );
+            }
+
+        }
 
         function getZipCodes () {
             return $http.get('/api/map/zip')
-                .then(function(response) {
-
-                    return response.data;
-                })
-                .catch(function(error) {
-                    logger.error('XHR request failed', error);
-                });
+                .then(response => response.data)
+                .catch(error => logger.error(error));
         }
 
         function drawZipCodes (zipCodes) {
+            var gmap = new GoogleMap();
             var queryInput = "(" + zipCodes + ")";
 
             var query = {
@@ -136,12 +153,12 @@
             }];
 
             var layerObject = {
-                map: map,
+                map: gmap.map,
                 query: query,
                 styles: styles
             };
 
-            layer.setOptions(layerObject);
+            gmap.layer.setOptions(layerObject);
         }
 
     }

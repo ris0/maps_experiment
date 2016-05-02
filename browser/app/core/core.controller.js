@@ -5,7 +5,7 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
-    function CoreController (googleMapService, getZipCodes) {
+    function CoreController (googleMapService, getZipCodes, $document) {
         var vm = this;
 
         /** @desc Google Map & JSON data */
@@ -19,8 +19,7 @@
 
         function drawZipCodes () {
             googleMapService.drawZipCodes(vm.params.input);
-                //.then(() => vm.params.input = "" )
-                //.catch(error => logger.error(error))
+            vm.params.input = "";
         }
 
         function suggest_zip(term) {
