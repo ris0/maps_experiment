@@ -5,13 +5,18 @@
         .module('app.core')
         .controller('CoreController', CoreController);
 
+    CoreController.$inject = ['googleMapService', 'getZipCodes'];
+
     function CoreController (googleMapService, getZipCodes) {
         var vm = this;
+
+        vm.radioModel = 'Middle';
 
         /** @desc Google Map & JSON data */
         vm.initMap = googleMapService.initMap();
         vm.getZipCodes = getZipCodes;
         vm.drawZipCodes = drawZipCodes;
+        vm.clearZipCodes = clearZipCodes;
 
         /** @desc autocomplete */
         vm.suggest_zip_delimited = suggest_zip_delimited;
@@ -20,6 +25,10 @@
         function drawZipCodes () {
             googleMapService.drawZipCodes(vm.params.input);
             vm.params.input = "";
+        }
+
+        function clearZipCodes () {
+            googleMapService.clearZipCodes();
         }
 
         function suggest_zip(term) {

@@ -5,48 +5,49 @@
         .module('app.map')
         .factory('googleMapService', googleMapService);
 
+    googleMapService.$inject = ['$http', 'logger', 'localStorageService'];
 
-    function googleMapService ($http, logger) {
+    function googleMapService ($http, logger, localStorageService) {
         var service = {
             getZipCodes  : getZipCodes,
             initMap      : initMap,
-            drawZipCodes : drawZipCodes
+            drawZipCodes : drawZipCodes,
+            clearZipCodes: clearZipCodes
         };
 
         return service;
 
-        //////////////////////////////
+        //////////////////////////////////////////////////////////////////////
 
-        function getZipCodes () {
-            return $http.get('/api/map/zip')
-                .then(response => response.data)
-                .catch(error => logger.error(error));
-        }
+        /** @desc GoogleMap Constructor Function */
+        function GoogleMap() {
 
-        /** @desc GoogleMap Constrcutor Function */
-        function GoogleMap(latLng) {
-
-            /** @desc Configuration */
-            var nyc = { lat: 40.730610, lng: -73.935242 };
-            this.mapOptions = {
-                center: latLng || nyc,
-                zoom: 12,
+            /** @desc Initial Configuration */
+            this.mapConfig = {
+                center: { lat: 40.730610, lng: -73.935242 },
+                zoom: 11,
                 mapTypeControl: false,
                 disableDefaultUI: false
             };
 
+            /** @desc HTML components */
             this.map_id = document.getElementById('map');
             this.right_panel = document.getElementById('right-panel');
             this.origin_input = document.getElementById('origin-input');
             this.destination_input = document.getElementById('destination-input');
 
             /** @desc Insantiate Google Maps, Directions, Places, and Fusion Tables*/
-            this.map = new google.maps.Map(this.map_id, this.mapOptions);
+            this.map = new google.maps.Map(this.map_id, this.mapConfig);
             this.layer = new google.maps.FusionTablesLayer();
             this.directionsService = new google.maps.DirectionsService;
             this.directionsDisplay = new google.maps.DirectionsRenderer;
             this.origin_autocomplete = new google.maps.places.Autocomplete(this.origin_input);
             this.destination_autocomplete = new google.maps.places.Autocomplete(this.destination_input);
+
+            /** @desc Fusion Table Query, Layer Style, Layer Object, newConfig */
+            this.query = null;
+            this.styles = null;
+            this.layerObject = null;
 
             /** @desc Bind services to map */
             this.origin_autocomplete.bindTo('bounds', this.map);
@@ -59,13 +60,16 @@
             this.setClickListener = setClickListener;
             this.getRoute = getRoute;
 
-            //////////////////////////////
+            //////////////////////////////////////////////////////////////////////
 
             function setClickListener(id, mode) {
                 var radioButton = document.getElementById(id);
-                radioButton.addEventListener('click', () => { this.travel_mode = mode })
+                radioButton.addEventListener('click', () => {
+                    this.travel_mode = mode;
+                })
             }
 
+            /** @desc Once the user selects location, change viewport/location */
             this.expandViewportToFitPlace = function (map, place) {
                 if (place.geometry.viewport) {
                     this.map.fitBounds(place.geometry.viewport);
@@ -75,6 +79,7 @@
                 }
             };
 
+            /** @return directions & route */
             function getRoute(origin, destination, travel_mode, directionsService, directionsDisplay) {
                 if (!origin || !destination) { return; }
                 var right_panel = document.getElementById('right-panel');
@@ -100,8 +105,15 @@
 
         }
 
+        /**
+         * @name initMap
+         * @desc Instantiate GoogleMap(): set map, panel, and event listeners.
+         * */
         function initMap () {
             var gmap = new GoogleMap();
+
+            if (localStorageService.checkPrevMap()) { restorePreviousMap(); }
+            if (localStorageService.checkPrevLayer()) { restorePreviousLayer(); }
 
             gmap.directionsDisplay.setMap(gmap.map);
             gmap.directionsDisplay.setPanel(gmap.right_panel);
@@ -110,54 +122,50 @@
             gmap.setClickListener('changemode-transit', google.maps.TravelMode.TRANSIT);
             gmap.setClickListener('changemode-driving', google.maps.TravelMode.DRIVING);
 
-            gmap.destination_autocomplete.addListener('place_changed', destinationCallBack);
+            gmap.map.addListener('bounds_changed', localStorageEventCallBack);
             gmap.origin_autocomplete.addListener('place_changed', originCallBack);
-            //placeMarker(event.latLng);
+            gmap.destination_autocomplete.addListener('place_changed', destinationCallBack);
 
-            /** @desc: localStorage * */
-            gmap.map.addListener(gmap.map, 'center_changed', (event) => {
-                console.log(event);
-                writeToStorage(event.latLng);
-            });
-            setupStorage();
-            readFromStorage();
+            //////////////////////////////////////////////////////////////////////
 
-            function setupStorage() {
-                localStorage.locations = [];
-                //return (!localStorage.locations) ? [] : localStorage.location;
+            function restorePreviousMap () {
+                var lat = Number(localStorageService.loadConfig('lat')),
+                    lng = Number(localStorageService.loadConfig('lng')),
+                    zoom = Number(localStorageService.loadConfig('zoom'));
+
+                gmap.map.setZoom(zoom);
+                gmap.map.setCenter({ lat: lat, lng: lng })
             }
 
-            function writeToStorage(location) {
-                localStorage.locations.push(location);
+            function restorePreviousLayer () {
+                var select = localStorageService.loadConfig('query.select'),
+                    from = localStorageService.loadConfig('query.from'),
+                    where = localStorageService.loadConfig('query.where');
+
+                var query = {
+                    select: select,
+                    from: from,
+                    where: where
+                };
+
+                var layerObject = {
+                    map : gmap.map,
+                    query : query,
+                    styles: gmap.styles
+                };
+                gmap.layer.setOptions(layerObject);
             }
 
-            function readFromStorage() {
-                console.log(typeof localStorage.locations);
-                //localStorage.locations.forEach(location => { placeMarker(location) });
+            function localStorageEventCallBack () {
+                var bounds = gmap.map.getBounds().getCenter(),
+                    lat = bounds.lat(),
+                    lng = bounds.lng(),
+                    zoom = gmap.map.getZoom();
+
+                localStorageService.saveConfig('lat', lat);
+                localStorageService.saveConfig('lng', lng);
+                localStorageService.saveConfig('zoom', zoom);
             }
-
-            //Funcion to place the marker on the map (flag)
-            //function placeMarker(location) {
-            //    var marker = new google.maps.Marker({
-            //        position: location,
-            //        icon:'flag.png',
-            //        map: map
-            //    });
-            //    //open information window once marker is placed
-            //    var infowindow = new google.maps.InfoWindow({
-            //        content: 'User has placed warning'
-            //    });
-            //    infowindow.open(map,marker);
-            //
-            //    //zoom into the marker
-            //    google.maps.event.addListener(marker,'click',function() {
-            //        map.setZoom(17);
-            //        map.setCenter(marker.getPosition());
-            //    });
-            //
-            //}
-
-            //////////////////////////////
 
             function originCallBack() {
                 var place = gmap.origin_autocomplete.getPlace();
@@ -181,38 +189,57 @@
                 gmap.getRoute( gmap.origin_place_id, gmap.destination_place_id,
                                gmap.travel_mode, gmap.directionsService, gmap.directionsDisplay );
             }
-
         }
+
+        /**
+         * @desc drawZipCodes: Assigns new value to google.maps.FusionTableLayer || this.layer
+         * @desc clearZipCodes: clear existing layer(s)
+         * */
 
         function drawZipCodes (zipCodes) {
             var gmap = new GoogleMap();
             var queryInput = "(" + zipCodes + ")";
 
-            var query = {
+            gmap.query = {
                 select: 'Geometry',
                 from: '1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw',
                 where: " ZIP IN " + queryInput
             };
 
-            var styles = [{
+            gmap.styles = [{
                 polygonOptions: { fillColor: '#1473ca', fillOpacity: 0.3 }
             }];
 
-            var layerObject = {
+            gmap.layerObject = {
                 map: gmap.map,
-                query: query,
-                styles: styles
+                query: gmap.query,
+                styles: gmap.styles
             };
 
-            gmap.layer.setOptions(layerObject);
+            localStorageService.saveConfig('query.select', gmap.query.select);
+            localStorageService.saveConfig('query.from', gmap.query.from);
+            localStorageService.saveConfig('query.where', gmap.query.where);
+
+            gmap.layer.setOptions(gmap.layerObject)
+
         }
 
+        function clearZipCodes () {
+            var gmap = new GoogleMap();
+            gmap.layer.setOptions({ map: gmap.map });
+        }
 
-
+        /**
+         * @desc getZipCodes: get request to back-end to get an array of all the zip codes in NYC
+         * @other
+         * Initially, I was making AJAX requests via Express to a 3rd party but it was slow.
+         * That said, I thought it would be more clever to store the zip codes in a JSON.
+         * Parse through that object and filter for NY zip codes, then send it as an array
+         * */
+        function getZipCodes () {
+            return $http.get('/api/map/zip')
+                .then(response => response.data)
+                .catch(error => logger.error(error));
+        }
     }
-
 })();
-
-
-
-

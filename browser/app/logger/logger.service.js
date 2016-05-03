@@ -9,12 +9,12 @@
 
     function logger($log, toastr) {
         var service = {
-            showToasts: true,
-            error   : error,
-            info    : info,
-            success : success,
-            warning : warning,
-            log     : $log.log
+            showToasts : true,
+            error      : error,
+            info       : info,
+            success    : success,
+            warning    : warning,
+            log        : $log.log
         };
 
         return service;

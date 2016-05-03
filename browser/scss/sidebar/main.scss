@@ -25,25 +25,10 @@
       background-size: cover;
     }
 
-    #changemode-driving {
-      background-color: #1473ca;
+    .active {
+      background-color: #f09142;
       color: white;
     }
-    #changemode-transit{
-      background-color: #1473ca;
-      color: white;
-    }
-    #changemode-bicycling{
-      background-color: #1473ca;
-      color: white;
-    }
-
-    #btn-grp2 {
-      button{
-        width: 33%;
-      }
-    }
-
   }
 
   .form-style{
@@ -61,9 +46,6 @@
     button {
       width: 50%;
     }
-
-
-
   }
 
   .input-group-addon {
@@ -86,17 +68,29 @@
     right: 0;
     bottom: 0;
     left: 0;
-    width: calc(100vw - 265px);
+    width: calc(100vw - 290px);
     height: auto;
     z-index: 2;
     overflow: auto;
     margin-right: 20px;
 
+    .warnbox-content {
+      display: none;
+    }
+    .warnbox-c1 {
+      display: none;
+    }
+    .warnbox-c2 {
+      display: none;
+    }
+
     #right-panel {
       height: 75vh;
       float: right;
-      width: 20vw;
+      width: 25vw;
       overflow: scroll;
+      border: 1px black;
+
     }
 
     #snapzd {

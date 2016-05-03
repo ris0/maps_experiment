@@ -4,6 +4,8 @@
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
+    "test": "nodemon ./node_modules/.bin/mocha --reporter spec tests/server/routes/map.js",
+    "browser-test": "karma start ./tests/browser/karma.conf.js",
     "postinstall": "gulp build"
   },
   "engines": {
@@ -45,7 +47,9 @@
     "karma-mocha": "^0.1.10",
     "karma-mocha-reporter": "^1.0.2",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
     "lodash": "^3.9.3",
+    "mocha": "^2.4.5",
     "mocha-mongoose": "^1.0.3",
     "mongodb": "^1.4.33",
     "mongoose": "^4.0.7",

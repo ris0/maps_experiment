@@ -17,8 +17,8 @@
                                ng-model = "vm.params.input">
 
                         <div class="btn-group btn-group-justified">
-                            <button class="zip-button" type="button" ng-click="vm.drawZipCodes()"> Submit </button>
-                            <button class="zip-clear-button" type="button"> Clear </button>
+                            <button class="btn btn-primary" type="button" ng-click="vm.drawZipCodes()"> Submit </button>
+                            <button class="btn btn-warning" type="button" ng-click="vm.clearZipCodes()"> Clear </button>
                         </div>
                     </div>
 
@@ -38,11 +38,15 @@
                                placeholder = "Choose destination"
                                ng-model = "vm.params.destination">
 
-                        <div class="btn-group btn-group-justified" id="btn-grp2">
-                            <button type="button" id="changemode-bicycling"> Bicycle </button>
-                            <button type="button" id="changemode-transit" > Transit </button>
-                            <button type="button" id="changemode-driving" > Drive </button>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-primary" ng-model="vm.radioModel"
+                                   uib-btn-radio="'Left'" id="changemode-bicycling">Bicycle </label>
+                            <label class="btn btn-primary" ng-model="vm.radioModel"
+                                   uib-btn-radio="'Middle'" id="changemode-transit">Transit </label>
+                            <label class="btn btn-primary" ng-model="vm.radioModel"
+                                   uib-btn-radio="'Right'" id="changemode-driving">Drive </label>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -53,10 +57,7 @@
     <div id="content" class="snap-content" data-snap-ignore="false">
         <navbar></navbar>
 
-        <button toggle-button="snapper"
-                id="snapzd"
-                ng-click="vm.toggleButton()">
-        </button>
+        <button toggle-button="snapper" id="snapzd"> </button>
 
         <div id="home">
             <div id="map"></div>
