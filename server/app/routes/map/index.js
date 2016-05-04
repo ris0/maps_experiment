@@ -3,7 +3,6 @@
 var express = require('express'),
     router = express.Router(),
     http = require('http'),
-    request = require('request'),
     path = require('path'),
     rootPath = path.join(__dirname, '../../../'),
     zipCodes = require(path.join(rootPath, './db/zipcodes.json'));
