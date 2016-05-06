@@ -13,3 +13,6 @@ path('/server/app/views/index.html')
 **Run tests by doing the following:**
 1) npm test (for backend test)
 2) npm run browser-test
+
+**TODO:**
+Refactor into ES6 & Restructure files 
