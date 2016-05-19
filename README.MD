@@ -1,18 +1,16 @@
-**Start the Application by running these commands in terminal**
+**Start the application by running these commands in terminal**
+
 1) npm install
 2) gulp
 3) npm start
+4) Visit http://localhost:1337/ 
 
-Visit http://localhost:1337/ 
-Toggle the sidebar by clicking on the ZipDrug logo on the side.
-Enter zip code(s), separated by commas, and click submit!
-You could also get directions to your next destination! 
-index.html is being served up from the back-end. 
-path('/server/app/views/index.html')
+**Using sidebar, autocomplete, autocomplete with delimiter, directions and  map**
+- Toggle the sidebar by clicking on the logo on the side.
+- Enter zip code(s), separated by commas, and click submit!
+- You could also get directions to your next destination! 
+- path('/server/app/views/index.html')
 
-**Run tests by doing the following:**
+**Tests under construction but contains preliminary structure**
 1) npm test (for backend test)
 2) npm run browser-test
-
-**TODO:**
-Refactor into ES6 & Restructure files 
